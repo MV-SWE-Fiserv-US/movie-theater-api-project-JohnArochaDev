@@ -6,7 +6,11 @@ const User = require('../models/User')
 showRouter.use(express.json())
 showRouter.use(express.urlencoded({ extended: true }))
 
-showRouter.put()
+showRouter.delete('/:id', async (req, res) => {
+    const id = req.params.id
+    await Show.destroy({ where: { id } })
+    res.send('Show deleted')
+})
 
 showRouter.put('/:id/:property', async (req, res) => {
     const id = req.params.id
