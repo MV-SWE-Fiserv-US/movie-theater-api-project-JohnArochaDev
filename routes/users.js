@@ -15,7 +15,7 @@ userRouter.get('/:id/shows', async (req, res) => {
         }
     })
     if (user) {
-        res.json(user.Shows)
+        res.json(user)
     } else {
         res.status(404).send('User not found')
     }
@@ -23,11 +23,20 @@ userRouter.get('/:id/shows', async (req, res) => {
 
 userRouter.put('/:userId/shows/:showId', async (req, res) => {
     const { userId, showId } = req.params
+
     const user = await User.findByPk(userId)
     const show = await Show.findByPk(showId)
+
     if (user && show) {
         await user.addShow(show)
-        res.status(200).send('Show associated with user successfully')
+
+        const updatedUser = await User.findByPk(userId, {
+            include: {
+                model: Show,
+                through: { attributes: [] }
+            }
+        })
+        res.status(200).json(updatedUser)
     } else {
         res.status(404).send('User or Show not found')
     }
