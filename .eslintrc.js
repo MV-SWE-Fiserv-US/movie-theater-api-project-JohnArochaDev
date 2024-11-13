@@ -51,6 +51,7 @@ module.exports = {
   rules: {
     semi: ['error', 'never'],
     indent: 'off',
-    'eol-last': 'off'
+    'eol-last': 'off',
+    'no-unused-vars': 'off'
   }
 }
