@@ -22,6 +22,7 @@
 //     ecmaVersion: 'latest'
 //   },
 //   rules: {
+//     semi: ['error', 'never']
 //   }
 // }
 module.exports = {
@@ -48,6 +49,8 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
-    semi: ['error', 'never']
+    semi: ['error', 'never'],
+    indent: 'off',
+    'eol-last': 'off'
   }
 }
