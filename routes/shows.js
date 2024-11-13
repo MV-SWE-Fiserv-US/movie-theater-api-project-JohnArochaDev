@@ -1,6 +1,6 @@
 const express = require('express')
 const showRouter = express.Router()
-const Show = require('../models/Show')
+const { Show } = require('../models/index')
 
 showRouter.use(express.json())
 showRouter.use(express.urlencoded({ extended: true }))

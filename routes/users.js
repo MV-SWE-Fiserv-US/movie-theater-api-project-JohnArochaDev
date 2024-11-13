@@ -1,7 +1,7 @@
 const express = require('express')
 const userRouter = express.Router()
-const User = require('../models/User')
-const Show = require('../models/Show')
+const { User } = require('../models/index')
+const { Show } = require('../models/index')
 
 userRouter.use(express.json())
 userRouter.use(express.urlencoded({ extended: true }))
@@ -10,8 +10,8 @@ userRouter.get('/:id/shows', async (req, res) => {
     const id = req.params.id
     const user = await User.findByPk(id, {
         include: {
-            model: Show
-            // through: { attributes: [] }
+            model: Show,
+            through: { attributes: [] }
         }
     })
     if (user) {
@@ -41,6 +41,7 @@ userRouter.get('/:id', async (req, res) => {
 
 userRouter.get('/', async (req, res) => {
     const allUsers = await User.findAll()
+    console.log('all users: \n', allUsers)
     res.json(allUsers)
 })
 
